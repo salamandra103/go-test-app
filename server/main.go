@@ -23,7 +23,7 @@ func main() {
 	})
 
 	e.GET("/hi", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hi")
+		return c.String(http.StatusOK, "Hidsadsa")
 	})
 
 	e.GET("/ping", func(c echo.Context) error {
