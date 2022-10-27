@@ -9,3 +9,6 @@ RUN go mod download
 EXPOSE 8080
 
 ENTRYPOINT go run main.go
+
+# RUN go install github.com/cosmtrek/air@latest
+# CMD ["air", "-c", ".air.toml"]
