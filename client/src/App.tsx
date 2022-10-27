@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import {A} from './A'
+
 function App() {
 
   useEffect(() => {
@@ -8,13 +10,14 @@ function App() {
     }).then(res => res.json()).then(res => {
 
       console.log(res);
-      debugger;
+      // debugger;
     })
   }, [])
 
   return (
     <div className="App">
-      Test
+      12313ввы
+      {/* <A/> */}
     </div>
   );
 }
