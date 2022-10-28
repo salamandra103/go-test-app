@@ -6,8 +6,10 @@ import (
 	"github.com/go-pg/pg/v10/orm"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	_ "github.com/lib/pq"
 	"net/http"
 	"os"
+	"time"
 )
 
 type User struct {
@@ -23,6 +25,22 @@ type Story struct {
 	Author   *User `pg:"rel:has-one"`
 }
 
+type Log struct {
+	tableName struct{} `pg:"logs,partition_by:RANGE(log_time)"`
+
+	Id        int       `pg:"id,pk"`
+	LogString string    `pg:"log_string"`
+	LogTime   time.Time `pg:"log_time,pk"`
+}
+
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "test"
+	password = "1234"
+	dbname   = "postgres"
+)
+
 func (u User) String() string {
 	return fmt.Sprintf("User<%d %s %v>", u.Id, u.Name, u.Emails)
 }
@@ -36,32 +54,50 @@ func main() {
 }
 
 func exampleDbModel() {
-	//db := pg.Connect(&pg.Options{
-	//	User:     "test",
-	//	Password: "1234",
-	//	Database: "postgres",
-	//	Network:
-	//})
-	opt, err := pg.ParseURL("postgres://test:1234@127.0.0.1:5432/postgres")
-	if err != nil {
-		panic(err)
-	}
-
-	db := pg.Connect(opt)
-
-	a := db.Ping(db.Context())
-	fmt.Println(a)
-
-	defer db.Close()
-
-	//err := createSchema(db)
+	//psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+	//	"password=%s dbname=%s sslmode=disable",
+	//	host, port, user, password, dbname)
+	//
+	//db, err := sql.Open("postgres", psqlInfo)
 	//
 	//if err != nil {
 	//	panic(err)
 	//}
 	//
+	//defer db.Close()
+	//
+	//err = db.Ping()
+	//if err != nil {
+	//	panic(err)
+	//}
+
+	db := pg.Connect(&pg.Options{
+		User:     "test",
+		Password: "1234",
+		Database: "postgres",
+	})
+
+	//opt, err := pg.ParseURL("postgres://test:1234@127.0.0.1:5432/postgres")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//db := pg.Connect(opt)
+
+	err := db.Ping(db.Context())
+	if err != nil {
+		panic(err)
+	}
+
+	defer db.Close()
+
+	err = createSchema(db)
+
+	//if err != nil {
+	//	panic(err)
+	//}
+	//
 	//user1 := &User{
-	//	Name:   "user 1",
+	//	Name:   "user",
 	//	Emails: []string{"email1", "email2"},
 	//	Id:     200,
 	//}
@@ -106,17 +142,26 @@ func startServer() {
 }
 
 func createSchema(db *pg.DB) error {
-	models := []interface{}{
-		(*User)(nil),
-		(*Story)(nil),
+	//models := []interface{}{
+	//	(*User)(nil),
+	//	(*Story)(nil),
+	//}
+	//
+	//for _, model := range models {
+	//	err := db.Model(model).CreateTable(&orm.CreateTableOptions{Temp: true})
+	//
+	//	if err != nil {
+	//		return err
+	//	}
+	//}
+
+	err := db.Model(&Log{}).CreateTable(&orm.CreateTableOptions{
+		IfNotExists: true,
+	})
+
+	if err != nil {
+		return err
 	}
 
-	for _, model := range models {
-		err := db.Model(model).CreateTable(&orm.CreateTableOptions{Temp: true})
-
-		if err != nil {
-			return err
-		}
-	}
 	return nil
 }
