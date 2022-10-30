@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	_ "github.com/lib/pq"
+	"github.com/olliefr/docker-gs-ping/postgres"
 	"net/http"
 	"os"
 	"time"
@@ -51,43 +52,16 @@ func (s Story) String() string {
 func main() {
 	exampleDbModel()
 	startServer()
+	postgres.ConnectToDb()
 }
 
 func exampleDbModel() {
-	//psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-	//	"password=%s dbname=%s sslmode=disable",
-	//	host, port, user, password, dbname)
-	//
-	//db, err := sql.Open("postgres", psqlInfo)
-	//
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
-	//defer db.Close()
-	//
-	//err = db.Ping()
-	//if err != nil {
-	//	panic(err)
-	//}
-
-	db := pg.Connect(&pg.Options{
-		User:     "test",
-		Password: "1234",
-		Database: "postgres",
-	})
-
-	//opt, err := pg.ParseURL("postgres://test:1234@127.0.0.1:5432/postgres")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//db := pg.Connect(opt)
-
-	err := db.Ping(db.Context())
+	//opt, err := pg.ParseURL("postgres://postgres:1234@postgres_container:5432/postgres?sslmode=disable")
+	opt, err := pg.ParseURL("postgres://postgres:1234@localhost:5432/postgres?sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
-
+	db := pg.Connect(opt)
 	defer db.Close()
 
 	err = createSchema(db)
@@ -102,7 +76,7 @@ func exampleDbModel() {
 	//	Id:     200,
 	//}
 	//
-	//_, err = db.Model(user1).Insert()
+	//_, err = postgres.Model(user1).Insert()
 	//
 	//if err != nil {
 	//	panic(err)
@@ -148,7 +122,7 @@ func createSchema(db *pg.DB) error {
 	//}
 	//
 	//for _, model := range models {
-	//	err := db.Model(model).CreateTable(&orm.CreateTableOptions{Temp: true})
+	//	err := postgres.Model(model).CreateTable(&orm.CreateTableOptions{Temp: true})
 	//
 	//	if err != nil {
 	//		return err

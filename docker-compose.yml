@@ -2,20 +2,22 @@ version: '3.5'
 
 services:
   server:
+    container_name: server_container
     build: ./server
     ports:
       - '8080:8080'
+    depends_on:
+      - postgres
     volumes:
       - ./server:/app
     networks:
       - app_net
   postgres:
     container_name: postgres_container
-    image: postgres
+    image: postgres:14.1-alpine
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
-      PGDATA: /data/postgres
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
     ports:
       - "5432:5432"
     networks:

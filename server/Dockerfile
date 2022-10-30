@@ -5,6 +5,8 @@ WORKDIR /app
 COPY ./ /app
 
 RUN go mod download
+RUN go get -d -v /app
+RUN go install -v /app
 
 EXPOSE 8080
 
