@@ -1,23 +1,25 @@
 version: '3.5'
 
 services:
-  server:
-    container_name: server_container
-    build: ./server
-    ports:
-      - '8080:8080'
-    depends_on:
-      - postgres
-    volumes:
-      - ./server:/app
-    networks:
-      - app_net
+#  server:
+#    container_name: server_container
+#    build: ./server
+#    ports:
+#      - '8080:8080'
+#    depends_on:
+#      - db
+#    volumes:
+#      - ./server:/app
+#    networks:
+#      - app_net
   postgres:
     container_name: postgres_container
     image: postgres:14.1-alpine
     environment:
-      POSTGRES_USER: "postgres"
+      POSTGRES_USER: "db"
       POSTGRES_PASSWORD: "1234"
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -33,4 +35,4 @@ networks:
   #     - ./client:/app
   #     - /app/node_modules
   # networks:
-  #   - postgres
+  #   - db

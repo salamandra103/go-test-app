@@ -1,15 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/orm"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 	_ "github.com/lib/pq"
-	"github.com/olliefr/docker-gs-ping/postgres"
-	"net/http"
-	"os"
+	"github.com/olliefr/docker-gs-ping/controller"
+	"github.com/olliefr/docker-gs-ping/db"
 	"time"
 )
 
@@ -34,101 +31,33 @@ type Log struct {
 	LogTime   time.Time `pg:"log_time,pk"`
 }
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "test"
-	password = "1234"
-	dbname   = "postgres"
+var (
+	articlesController controller.ArticlesController = controller.NewArticlesController()
 )
 
-func (u User) String() string {
-	return fmt.Sprintf("User<%d %s %v>", u.Id, u.Name, u.Emails)
-}
-func (s Story) String() string {
-	return fmt.Sprintf("Story<%d %s %s>", s.Id, s.Title, s.Author)
-}
-
 func main() {
-	exampleDbModel()
-	startServer()
-	postgres.ConnectToDb()
+	db.ConnectToDb()
+	r := gin.Default()
+
+	articlesRoutes := r.Group("api/articles")
+	{
+		articlesRoutes.GET("/", articlesController.GetArticles)
+		articlesRoutes.POST("/create", articlesController.SetArticles)
+		articlesRoutes.DELETE("/delete", articlesController.DeleteArticles)
+	}
+
+	r.Run()
 }
 
-func exampleDbModel() {
-	//opt, err := pg.ParseURL("postgres://postgres:1234@postgres_container:5432/postgres?sslmode=disable")
-	opt, err := pg.ParseURL("postgres://postgres:1234@localhost:5432/postgres?sslmode=disable")
+func exampleDbModel(db *pg.DB) {
+	err := createSchema(db)
+
 	if err != nil {
 		panic(err)
 	}
-	db := pg.Connect(opt)
-	defer db.Close()
-
-	err = createSchema(db)
-
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
-	//user1 := &User{
-	//	Name:   "user",
-	//	Emails: []string{"email1", "email2"},
-	//	Id:     200,
-	//}
-	//
-	//_, err = postgres.Model(user1).Insert()
-	//
-	//if err != nil {
-	//	panic(err)
-	//}
-
-}
-
-func startServer() {
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"*"},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-	}))
-
-	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hell123oo! <3")
-	})
-
-	e.GET("/createModel", func(c echo.Context) error {
-		exampleDbModel()
-		return c.String(http.StatusOK, "dsadsa")
-	})
-
-	e.GET("/ping", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
-	})
-
-	httpPort := os.Getenv("HTTP_PORT")
-	if httpPort == "" {
-		httpPort = "8080"
-	}
-
-	e.Logger.Fatal(e.Start(":" + httpPort))
 }
 
 func createSchema(db *pg.DB) error {
-	//models := []interface{}{
-	//	(*User)(nil),
-	//	(*Story)(nil),
-	//}
-	//
-	//for _, model := range models {
-	//	err := postgres.Model(model).CreateTable(&orm.CreateTableOptions{Temp: true})
-	//
-	//	if err != nil {
-	//		return err
-	//	}
-	//}
-
 	err := db.Model(&Log{}).CreateTable(&orm.CreateTableOptions{
 		IfNotExists: true,
 	})
