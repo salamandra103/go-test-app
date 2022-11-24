@@ -5,13 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="296473fe-4802-4eed-a0a3-412be7499ed2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/controller/articles-controller.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postgresql/data/pg_stat_tmp/db_13756.stat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/1247" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/1247" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/1249" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/1249" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/1259" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/1259" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/16384" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/2224" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/2224" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/2604" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/2604" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/2606" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/2606" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/2608" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/2608" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/2610" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/2610" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/3350" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/3350" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/base/13756/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/base/13756/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/global/pg_control" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/global/pg_internal.init" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/pg_stat_tmp/db_0.stat" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/pg_stat_tmp/db_0.stat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/pg_stat_tmp/global.stat" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/pg_stat_tmp/global.stat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/pg_wal/000000010000000000000001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/pg_xact/0000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postgresql/data/postmaster.pid" beforeDir="false" afterPath="$PROJECT_DIR$/postgresql/data/postmaster.pid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controller/articles-controller.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/db/connect.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/server/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/go.sum" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/postgres/connect.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/db/connect.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/tmp/build-errors.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +58,18 @@
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2GRgYmc9HX3W9umGNwkr134522q" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable..is.expanded" value="true" />
     <property name="configurable.GoLibrariesConfigurable.is.expanded" value="true" />
@@ -55,7 +80,7 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PostgreSQL, Greenplum, Redshift" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -92,6 +117,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
